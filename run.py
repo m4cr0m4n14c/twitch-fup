@@ -13,9 +13,6 @@ load_dotenv()
 bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
 tg_chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
-# streamer blackouts: 5e7ba1a3b822994754dd9a6f
-# python3 run.py 5e7ba1a3b822994754dd9a6f m4cr0m4n14c
-
 try:
     with open("stream_data.json", "r") as read_file:
         data_read = json.load(read_file)
