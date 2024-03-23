@@ -1,0 +1,4 @@
+https://api.streamelements.com/kappa/v2/points/5e7ba1a3b822994754dd9a6f/m4cr0m4n14c
+
+
+{"channel":"5e7ba1a3b822994754dd9a6f","username":"m4cr0m4n14c","points":282528,"pointsAlltime":521528,"watchtime":896360,"rank":42}
