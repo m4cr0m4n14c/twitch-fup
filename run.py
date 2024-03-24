@@ -56,4 +56,6 @@ async def main(channel, username):
         json.dump(data_read, write_file, indent=4)
 
 if __name__ == '__main__':
+    if(len(sys.argv)<3):
+        sys.exit("O script requer dois argumentos: codigo do streamer e username")
     asyncio.run(main(sys.argv[1], sys.argv[2]))
