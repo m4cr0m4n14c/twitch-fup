@@ -10,8 +10,8 @@ import asyncio
 load_dotenv()
 
 # Access environment variables
-bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
-tg_chat_id = os.getenv('TELEGRAM_CHAT_ID')
+bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+tg_chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
 try:
     with open("stream_data.json", "r") as read_file:
@@ -26,7 +26,7 @@ def get_stream_data(channel, username):
     response = requests.get(url)
     return json.loads(response.text)
 
-#if __name__ == "__main__":
+
 async def main(channel, username):
     dados = get_stream_data(channel, username)
     idx = next(
@@ -44,18 +44,25 @@ async def main(channel, username):
         print("Sem histórico anterior")
         data_read.append(dados)
     else:
-        if(data_read[idx]["points"]==dados["points"]):
-            msg = "🛑 Famador parado! Pontos: " + str(dados["points"]) + " | User: " + dados["username"] + " | Rank: " + str(dados["rank"])
+        if data_read[idx]["points"] == dados["points"]:
+            msg = (
+                "🛑 Famador parado! Pontos: "
+                + str(dados["points"])
+                + " | User: "
+                + dados["username"]
+                + " | Rank: "
+                + str(dados["rank"])
+            )
             print(msg)
             bot = telegram.Bot(bot_token)
             async with bot:
                 await bot.send_message(text=msg, chat_id=tg_chat_id)
-            #enviar mensagem pelo telegram
-        data_read[idx]=dados
-    with open('stream_data.json', 'w') as write_file:
+        data_read[idx] = dados
+    with open("stream_data.json", "w") as write_file:
         json.dump(data_read, write_file, indent=4)
 
-if __name__ == '__main__':
-    if(len(sys.argv)<3):
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
         sys.exit("O script requer dois argumentos: codigo do streamer e username")
     asyncio.run(main(sys.argv[1], sys.argv[2]))
